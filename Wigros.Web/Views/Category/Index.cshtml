@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Wigros.Web.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Kategoriler</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <br />
+                        <a href="/category/create/" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i> Yeni Kategori</a>
+                        <hr />
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Kategori Adı</th>
+                                    <th scope="col">Aktif</th>
+                                    <th scope="col">Tarih</th>
+                                    <th scope="col">Kayıt Eden Kullanıcı</th>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </th>
+                                        <th>
+                                            @if (item.IsActive == true)
+                                            {
+                                                <button type="button" class="btn btn-success"><i class="bi bi-check-circle"></i></button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-danger"><i class="bi bi-check-circle"></i></button>
+
+                                            }
+                                        </th>
+                                        <th>
+                                            @Convert.ToDateTime(item.CreatedDate).ToString("dddd, dd MMMM yyyy")
+                                        </th>
+                                        <th>
+                                            @Html.DisplayFor(modelItem => item.User.Fullname)
+                                        </th>
+                                        <th>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </th>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <!-- End small tables -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main>
+

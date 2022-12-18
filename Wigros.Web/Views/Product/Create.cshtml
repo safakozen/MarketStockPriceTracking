@@ -1,0 +1,72 @@
+﻿@model Wigros.Web.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Yeni Ürün</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                    <form>
+                        <div class="row mb-3">
+                            @Html.LabelFor(model => model.CategoryId, "Kategori", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            @Html.LabelFor(model => model.BrandId, "Marka", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("BrandId", null, htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.BrandId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            @Html.LabelFor(model => model.Name, " Ürün İsmi", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            @Html.LabelFor(model => model.ImagePath, "Resim", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input type="file" name="productImage" id="productImage" class="form-control" /><br />
+                                @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-success"><i class="bi bi-save me-1"></i> Kaydet</button>
+                                <a href="/product/index/" class="btn btn-warning"><i class="ri-arrow-go-back-fill"></i> Geri Dön</a>
+                            </div>
+                        </div>
+                    </form><!-- End General Form Elements -->
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+

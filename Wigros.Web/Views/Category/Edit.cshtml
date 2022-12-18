@@ -1,0 +1,65 @@
+﻿@model Wigros.Web.Models.Category
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>@Model.Name Kategorisini düzenle</h1>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"></h5>
+                        @using (Html.BeginForm("Edit", "Category", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            <form>
+                                <div class="row mb-3">
+                                    @Html.LabelFor(model => model.Name, "İsim", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3" hidden="hidden">
+                                    @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="row mb-3">
+                                    @Html.LabelFor(model => model.IsActive, "Aktif", htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-10">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.IsActive)
+                                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label"></label>
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-success"><i class="bi bi-save me-1"></i> Kaydet</button>
+                                        <a href="/brand/index/" class="btn btn-warning"><i class="ri-arrow-go-back-fill"></i> Geri Dön</a>
+                                    </div>
+                                </div>
+                            </form><!-- End General Form Elements -->
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
